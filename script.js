@@ -4,7 +4,7 @@ $(document).ready(function () {
 
     var APIKey = "6a6d81762f7d9ffba1f57aa4ff8d7ab1"
 
-    //   Looks through local storage to get searched cities
+    //  local storage 
     function initSearched() {
         if (localStorage.length == 0) {
             console.log("empty")
@@ -173,52 +173,7 @@ $(document).ready(function () {
 
     // Gets UV index
 
-    function getUV(lat, lon) {
-
-        var forecastURL = "https://api.openweathermap.org/data/2.5/onecall?lat="
-            + lat + "&lon=" + lon + "&exclude=hourly,minutely&units=imperial&appid=" + APIKey
-
-        $.ajax({
-            url: forecastURL,
-            method: "GET"
-        }).then(function (response) {
-            var uvI = response.current.uvi
-
-            // uvI = 11
-
-            var scale = ""
-            console.log("class uvi", uvI)
-
-
-            if (1 <= uvI && uvI < 3) {
-                scale = "bg-success"
-            }
-            else if (3 <= uvI && uvI < 6) {
-                scale = "bg-warning"
-            }
-            else if (6 <= uvI && uvI < 8) {
-                scale = "orange"
-            }
-            else if (8 <= uvI && uvI < 11) {
-                scale = "bg-danger";
-            }
-            else {
-                scale = "violet"
-            }
-
-
-
-            console.log("UV ", response, uv)
-            var uvIndex = $("<div>").attr("class", "mt-3 d-flex flex-row")
-            var uv = $("<div>").text("UV index:  ").attr("class", "")
-            var index = $("<div>").text("    " + uvI + " ").attr("class", "text-white p-1 ml-2 rounded " + scale)
-            console.log(uv)
-            uvIndex.append(uv, index)
-            $("#dashBoard").children().append(uvIndex)
-            return parseFloat(uv)
-
-        })
-    }
+   
 
    // Event Listener for the searched cities 
 
